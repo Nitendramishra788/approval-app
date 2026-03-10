@@ -6,16 +6,18 @@ const path = require("path");
 const methodOverride = require("method-override");
 
 const app = express();
-const port = 3000;
 
-// Connect MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/approvalApp")
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+const PORT = process.env.PORT || 3000;
+
+// MongoDB Connect
+mongoose.connect(process.env.MONGO_URL)
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.log(err));
 
 // Middleware
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
@@ -24,5 +26,7 @@ app.use(methodOverride("_method"));
 const approvalRoutes = require("./routes/approval");
 app.use("/", approvalRoutes);
 
-// Start server
-app.listen(port, () => console.log(`Server running on port ${port}`));
+// Start Server
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
+});
