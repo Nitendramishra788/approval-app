@@ -1,0 +1,8 @@
+<%- include("partials/header") %>
+<h2>Partner 2: Review Statement</h2>
+<p><strong>Statement:</strong> <%= approval.statement %></p>
+<form action="/approval/<%= approval._id %>/approve" method="POST">
+  <button name="partner2Signature" value="yes">Approve ✅</button>
+  <button name="partner2Signature" value="no">Cancel ❌</button>
+</form>
+<%- include("partials/footer") %>

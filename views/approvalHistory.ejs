@@ -1,0 +1,47 @@
+<%- include("partials/header") %>
+
+<div class="container mt-5">
+
+<h1 class="mb-4 text-center">All Approval History</h1>
+
+<% approvals.forEach(a => { %>
+
+<div class="card mb-4 shadow">
+  <div class="card-body">
+
+    <h5 class="card-title">Statement</h5>
+    <p class="card-text"><%= a.statement %></p>
+
+    <hr>
+
+    <p>
+      <strong>P1:</strong> <span class="badge bg-success"><%= a.partner1Signature %></span>
+      <strong>P2:</strong> <span class="badge bg-warning text-dark"><%= a.partner2Signature %></span>
+    </p>
+
+    <p class="text-muted">
+      Created: <%= a.createdAt.toLocaleString() %>
+    </p>
+
+    <h5 class="mt-3">Logs</h5>
+
+    <ul class="list-group">
+      <% a.logs.forEach(l => { %>
+        <li class="list-group-item">
+          <strong><%= l.user %></strong> :
+          <%= l.action %>
+          <span class="text-muted float-end">
+            <%= l.timestamp.toLocaleString() %>
+          </span>
+        </li>
+      <% }) %>
+    </ul>
+
+  </div>
+</div>
+
+<% }) %>
+
+</div>
+
+<%- include("partials/footer") %>

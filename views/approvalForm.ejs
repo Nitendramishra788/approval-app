@@ -1,0 +1,93 @@
+<%- include("partials/header") %>
+
+<div class="container mt-5">
+
+<div class="card shadow p-4">
+
+<h2 class="mb-4 text-center">Partner 1: Submit Statement</h2>
+
+<form action="/approval/create" method="POST" class="needs-validation" novalidate>
+
+<div class="mb-3">
+<label class="form-label">Statement</label>
+
+<textarea 
+class="form-control"
+name="statement"
+rows="4"
+placeholder="Type your statement"
+required></textarea>
+
+<div class="invalid-feedback">
+Give statement
+</div>
+
+</div>
+
+
+<div class="mb-3">
+<label class="form-label">Confirmation</label>
+
+<input 
+type="text"
+class="form-control"
+name="partner1Signature"
+placeholder="Type YES or NO"
+required>
+
+<div class="invalid-feedback">
+Give your opinion YES or NO
+</div>
+
+</div>
+
+
+<div class="mb-3">
+<label class="form-label">Partner 2 Email</label>
+
+<input
+type="email"
+class="form-control"
+name="partner2Email"
+placeholder="Partner 2 Email"
+required>
+
+<div class="invalid-feedback">
+Please type your partner Gmail
+</div>
+
+</div>
+
+<div class="text-center">
+<button class="btn btn-primary px-4" type="submit">
+Send Statement
+</button>
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+(() => {
+  'use strict'
+  const forms = document.querySelectorAll('.needs-validation')
+
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+
+    }, false)
+  })
+})();
+</script>
+
+<%- include("partials/footer") %>
