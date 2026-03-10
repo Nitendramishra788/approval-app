@@ -1,18 +1,22 @@
 // app.js
 require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 
 const app = express();
-
 const PORT = process.env.PORT || 3000;
 
-// MongoDB Connect
-mongoose.connect(process.env.MONGO_URL)
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
+// MongoDB Connect (safe)
+if (process.env.MONGO_URL) {
+  mongoose.connect(process.env.MONGO_URL)
+    .then(() => console.log("MongoDB Connected"))
+    .catch(err => console.log("MongoDB Error:", err));
+} else {
+  console.log("MONGO_URL not found, running without database");
+}
 
 // Middleware
 app.set("view engine", "ejs");
